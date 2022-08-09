@@ -1,1 +1,1 @@
-# resource-sharing
+# Resource Sharing
