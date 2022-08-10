@@ -2,9 +2,10 @@ const express = require('express');
 const bp = require('body-parser');
 const router = require('./routes');
 const error = require('./middleware/error');
+const config = require('./config/dbConnection');
 
 const app = express();
-
+config();
 //Body Parser
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));

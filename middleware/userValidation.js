@@ -9,6 +9,11 @@ module.exports.validateAddUser = (data) => {
       .required(),
 
     password: Joi.string().min(6).required(),
+    phone: Joi.number().min(4).required(),
+    address: Joi.string().required(),
+    city: Joi.string().required(),
+    country: Joi.string().required(),
+    companyName: Joi.string().required(),
   });
   return schema.validate(data);
 };
