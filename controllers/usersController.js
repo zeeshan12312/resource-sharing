@@ -3,7 +3,7 @@ const { User } = require('../models/users');
 const validateUser = require('../middleware/userValidation');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
-const { reset } = require('nodemon');
+const validateObjectId = require('../helpers/idValidation');
 
 exports.addUser = async (req, res) => {
   const { name, email, password, phone, address, city, country, companyName } =
@@ -43,17 +43,19 @@ exports.userslist = async (req, res) => {
   return res.status(200).send(result);
 };
 exports.getUserById = async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+  if (!validateObjectId.validateId(req.params.id))
     return res.status(400).send('Invalid ID Provided');
 
   const result = await User.findById(req.params.id);
+  if (!result) return res.status(404).send('User Not Fuund');
+
   return res.status(200).send(result);
 };
 
 exports.updateUserById = async (req, res) => {
   const { name, password, phone, address, city, country, companyName } =
     req.body;
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+  if (!validateObjectId.validateId(req.params.id))
     return res.status(400).send('Invalid ID Provided');
 
   const validation = validateUser.validateUpdateUser(req.body);
