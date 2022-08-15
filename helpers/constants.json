@@ -1,0 +1,12 @@
+{ 
+    "USER": {
+    "NOT_EXIST": "User not exists.",
+    "EMAIL_ALREADY_EXISTS": "Email already exists.",
+    "LOGIN_ERROR":"Incorrect email or password",
+    "NOT_FOUND_EMAIL":"No users found with this email",
+    "FORGOT_PASSWORD_EMAIL":"We have emailed you a link to reset your password",
+    "AUTH_ERROR": "Unable to authenticated the user.",
+    "LIST_SUCCESS": "User listed Successfully",
+    "FORGET_EMAIL_SUBJECT":"Password Reset Link"
+}
+}

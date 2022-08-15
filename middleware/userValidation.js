@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-module.exports.validateAddUser = (data) => {
+exports.validateAddUser = (data) => {
   const schema = Joi.object({
     name: Joi.string().alphanum().min(6).max(30).required(),
     email: Joi.string()
@@ -17,7 +17,7 @@ module.exports.validateAddUser = (data) => {
   return schema.validate(data);
 };
 
-module.exports.validateUpdateUser = (data) => {
+exports.validateUpdateUser = (data) => {
   const schema = Joi.object({
     name: Joi.string().alphanum().min(6).max(30).required(),
     password: Joi.string().min(6).required(),
