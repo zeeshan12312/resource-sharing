@@ -6,7 +6,7 @@ exports.validateAddUser = (data) => {
     email: Joi.string()
       .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
       .required(),
-
+    profileImage: Joi.string(),
     password: Joi.string().min(6).required(),
     phone: Joi.number().min(4).required(),
     address: Joi.string().required(),

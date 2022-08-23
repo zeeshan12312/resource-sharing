@@ -7,8 +7,8 @@ const config = require('./config/dbConnection');
 const app = express();
 config();
 //Body Parser
-app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
+app.use(bp.json());
 
 app.use('/api/v1/', router);
 app.use(error.get500);

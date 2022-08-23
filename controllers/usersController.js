@@ -5,19 +5,40 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const validateObjectId = require('../helpers/idValidation');
 const CONST = require('../helpers/constants.json');
-
+const uploadFile = require('../middleware/upload');
 exports.addUser = async (req, res) => {
-  const { name, email, password, phone, address, city, country, companyName } =
-    req.body;
+  const {
+    name,
+    email,
+    profileImage,
+    password,
+    phone,
+    address,
+    city,
+    country,
+    companyName,
+  } = req.body;
   const validation = validateUser.validateAddUser(req.body);
   if (validation.error)
     return res.status(400).send(validation.error.details[0].message);
+
+  try {
+    await uploadFile(req, res);
+    // if (req.file == undefined)
+    //   return res.status(400).send('Please upload a file!');
+  } catch (err) {
+    return res
+      .status(500)
+      .send(`Could not upload the file: ${req.body.file}. ${err}`);
+  }
+
   let findOne = await User.findOne({ email: email });
   if (findOne) return res.status(400).send(CONST.USER.EMAIL_ALREADY_EXISTS);
 
   const user = new User({
     name,
     email,
+    profileImage,
     password,
     phone,
     address,
