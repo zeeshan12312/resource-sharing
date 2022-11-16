@@ -56,6 +56,11 @@ const userSchema = new mongoose.Schema(
       min: 5,
       max: 100,
     },
+    isDeleted: {
+      type: String,
+      enum: [true, false],
+      default: false,
+    },
   },
   {
     timestamps: true,

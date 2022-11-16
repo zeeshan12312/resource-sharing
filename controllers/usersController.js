@@ -73,6 +73,16 @@ exports.getUserById = async (req, res) => {
 
   return res.status(200).send(result);
 };
+exports.deleteUserById = async (req, res) => {
+  if (!validateObjectId.validateId(req.params.id))
+    return res.status(400).send(CONST.USER.NOT_EXIST);
+
+  const result = await User.findById(req.params.id);
+  if (!result) return res.status(404).send(CONST.USER.NOT_EXIST);
+  result.isDeleted = true;
+  result = await result.save();
+  return res.status(200).send(result);
+};
 
 exports.updateUserById = async (req, res) => {
   const { name, password, phone, address, city, country, companyName } =
